@@ -118,15 +118,7 @@ class FirstScreen extends StatelessWidget {
                       itemCount: items.length,
                       itemBuilder: (ctx, index) {
                         var item = items[index];
-                        return ListTile(
-                          leading: Image.asset(item['pic']),
-                          title: Text(item['title']),
-                          subtitle: Text(item['price']),
-                          trailing: IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {},
-                          ),
-                        );
+                        return buildListItem(item);
                       },
                     ),
                   ),
@@ -134,23 +126,95 @@ class FirstScreen extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            children: [
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      side: BorderSide(color: Colors.black)),
-                  onPressed: () {},
-                  child: Icon(Icons.card_travel),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                buildIconButton(Icons.search),
+                SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        side: BorderSide(
+                          color: Colors.black,
+                        )),
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.card_travel,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 50,
+                  width: 100,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        side: BorderSide(
+                          color: Colors.black,
+                        )),
+                    onPressed: () {},
+                    child: FittedBox(
+                      child: Text(
+                        'Checkout',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  SizedBox buildIconButton(icon) {
+    return SizedBox(
+      height: 50,
+      width: 50,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            side: BorderSide(
+              color: Colors.black,
+            )),
+        onPressed: () {},
+        child: Icon(
+          icon,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  ListTile buildListItem(item) {
+    return ListTile(
+      leading: SizedBox(
+          height: 80,
+          width: 70,
+          child: Image.asset(
+            item['pic'],
+            fit: BoxFit.fill,
+          )),
+      title: Text(
+        item['title'],
+      ),
+      subtitle: Text(item['price']),
+      trailing: IconButton(
+        icon: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
